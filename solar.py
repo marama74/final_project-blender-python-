@@ -146,4 +146,5 @@ scene.render.fps = 30
 scene.world.use_nodes = True
 scene.world.node_tree.nodes["Background"].inputs[0].default_value = (0, 0, 0, 1)
 
-print("✅ COMPLETE SOLAR SYSTEM CREATED (150 frames)")
+print(" COMPLETE SOLAR SYSTEM CREATED (150 frames)")
+
