@@ -42,6 +42,7 @@ def create_orbit(radius):
     orbit.data.materials.append(
         emissive_material("Orbit_Mat", (0.3, 0.6, 1.0), 0.4)
     )
+    # Orbit stays in place - NOT parented to anything
 
 # ------------------- TEXT LABEL -------------------
 def add_label(text, parent):
@@ -65,7 +66,7 @@ def create_saturn_rings(parent):
         planet_material("Saturn_Rings_Mat", (0.8, 0.7, 0.5))
     )
 
-# ------------------- SUN -------------------
+# ------------------- SUN (STATIONARY) -------------------
 bpy.ops.mesh.primitive_uv_sphere_add(radius=3, location=(0, 0, 0))
 sun = bpy.context.active_object
 sun.name = "Sun"
@@ -89,12 +90,15 @@ planet_data = [
 # ------------------- CREATE PLANETS -------------------
 for name, size, color, radius, speed in planet_data:
 
+    # Create orbit ring (stays stationary)
     create_orbit(radius)
 
+    # Create empty for planet rotation (NOT parented to sun, stays at origin)
     bpy.ops.object.empty_add(location=(0, 0, 0))
     empty = bpy.context.active_object
-    empty.parent = sun
+    empty.name = f"{name}_Orbit"
 
+    # Create planet
     bpy.ops.mesh.primitive_uv_sphere_add(radius=size, location=(radius, 0, 0))
     planet = bpy.context.active_object
     planet.name = name
@@ -108,21 +112,33 @@ for name, size, color, radius, speed in planet_data:
     if name == "Saturn":
         create_saturn_rings(planet)
 
+    # Animate planet orbit around sun
     for frame in range(0, ANIMATION_FRAMES + 1, PLANET_KEYFRAME_INTERVAL):
         angle = speed * 2 * math.pi * frame / ANIMATION_FRAMES
         empty.rotation_euler = (0, 0, angle)
         empty.keyframe_insert("rotation_euler", frame=frame)
 
-# ------------------- STARS -------------------
-for _ in range(STAR_COUNT):
+# ------------------- STARS (WITH TWINKLING) -------------------
+for i in range(STAR_COUNT):
     x, y, z = random.uniform(-80,80), random.uniform(-80,80), random.uniform(-40,40)
     if math.sqrt(x*x + y*y) < 50:
         continue
+    
     bpy.ops.mesh.primitive_uv_sphere_add(radius=0.12, location=(x, y, z))
     star = bpy.context.active_object
-    star.data.materials.append(
-        emissive_material("Star_Mat", (1,1,1), random.uniform(2,4))
-    )
+    
+    # Create material with animated emission strength
+    base_strength = random.uniform(2, 4)
+    mat = emissive_material(f"Star_Mat_{i}", (1, 1, 1), base_strength)
+    star.data.materials.append(mat)
+    
+    # Animate star twinkling (emission strength varies)
+    emission_node = mat.node_tree.nodes["Emission"]
+    for frame in range(0, ANIMATION_FRAMES + 1, 10):
+        # Random strength variation for twinkling effect
+        strength = base_strength + random.uniform(-0.5, 0.5)
+        emission_node.inputs["Strength"].default_value = strength
+        emission_node.inputs["Strength"].keyframe_insert("default_value", frame=frame)
 
 # ------------------- CAMERA -------------------
 bpy.ops.object.camera_add(location=(0, -60, 30))
@@ -130,6 +146,7 @@ camera = bpy.context.active_object
 camera.rotation_euler = (math.radians(55), 0, 0)
 bpy.context.scene.camera = camera
 
+# Animate camera orbiting around the solar system
 for frame in range(0, ANIMATION_FRAMES + 1, CAMERA_KEYFRAME_INTERVAL):
     angle = 2 * math.pi * frame / ANIMATION_FRAMES
     camera.location = (-60 * math.sin(angle), -60 * math.cos(angle), 30)
@@ -142,9 +159,13 @@ scene = bpy.context.scene
 scene.frame_end = ANIMATION_FRAMES
 scene.render.engine = 'CYCLES'
 scene.cycles.samples = 64
-scene.render.fps = 30
+scene.render.fps = 12
 scene.world.use_nodes = True
-scene.world.node_tree.nodes["Background"].inputs[0].default_value = (0, 0, 0, 1)
+scene.world.node_tree.nodes["Background"].inputs[0].default_value = (0, 0, 0.03, 1)
 
 print(" COMPLETE SOLAR SYSTEM CREATED (150 frames)")
-
+print("   - Sun: Stationary at center")
+print("   - Orbit rings: Fixed in place")
+print("   - Planets: Revolving around sun along orbit rings")
+print("   - Stars: Twinkling in place")
+print("   - Camera: Rotating around the scene")
