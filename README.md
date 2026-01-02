@@ -8,7 +8,11 @@ A procedurally generated, animated solar system built using **Object-Oriented Pr
 - **Shahab Shinwari** (539515)
 - **Usama Bin Nadeem** (539308)
 - **Naveed Anjum** (577607)
-
+## Configuration Section
+pythonANIMATION_FRAMES = 150
+PLANET_KEYFRAME_INTERVAL = 5
+CAMERA_KEYFRAME_INTERVAL = 5
+STAR_COUNT = 20
 ## Project Overview
 
 This project demonstrates advanced Python programming and 3D procedural generation by creating a complete animated solar system with planets, orbits, twinkling stars, and a dynamic camera system—all generated through code.
