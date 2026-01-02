@@ -132,8 +132,7 @@ Free to use for educational and personal projects. Feel free to modify and share
 
 ## Author
 
-Created as an educational Blender Python scripting example for visualizing our solar system.
-
+Group 1
 ## Credits
 
 - Inspired by real astronomical data (sizes and distances scaled for visibility)
@@ -141,4 +140,3 @@ Created as an educational Blender Python scripting example for visualizing our s
 
 ---
 
-**Enjoy your animated solar system!**
