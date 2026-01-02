@@ -275,8 +275,9 @@ Suggestions for improvements:
 - Designed for educational demonstration of OOP principles
   
 ## Authors
-Maryam Arshad(498506),shahab shinwari,
-usma ibn Nadeem,
+Maryam Arshad(498506),Shahab Shinwari
+(539515),
+Usama Bin Nadeem (539308),
 Naveed Anjum (577607)
 
 
