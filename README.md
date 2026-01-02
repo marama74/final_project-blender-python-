@@ -273,6 +273,11 @@ Suggestions for improvements:
 - Built using **Blender 3D** and Python API
 - Inspired by real solar system mechanics
 - Designed for educational demonstration of OOP principles
+  
+## Authors
+Maryam Arshad(498506)
+Naveed Anjum (577607)
+
 
 ---
 
