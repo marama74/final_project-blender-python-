@@ -2,6 +2,13 @@
 
 A procedurally generated, animated solar system built using **Object-Oriented Programming principles** in Python for Blender 3D.
 
+## Authors
+
+- **Maryam Arshad** (498506)
+- **Shahab Shinwari** (539515)
+- **Usama Bin Nadeem** (539308)
+- **Naveed Anjum** (577607)
+
 ## Project Overview
 
 This project demonstrates advanced Python programming and 3D procedural generation by creating a complete animated solar system with planets, orbits, twinkling stars, and a dynamic camera system—all generated through code.
@@ -69,24 +76,54 @@ SolarSystem (Main Orchestrator)
 
 ### Prerequisites
 - **Blender 3.0+** (with Python 3.9+)
-- No additional packages required
+- **VS Code** (Visual Studio Code)
+- **Blender Development Extension** for VS Code (optional but recommended)
+- No additional Python packages required
 
 ### Running the Script
 
-#### Method 1: Blender Scripting Tab
+#### Method 1: VS Code with Blender Extension (Recommended)
+1. **Install Blender Extension in VS Code**
+   - Open VS Code
+   - Go to Extensions (Ctrl+Shift+X)
+   - Search for "Blender Development"
+   - Install the extension by Jacques Lucke
+
+2. **Configure Blender Path**
+   - Open VS Code Settings (Ctrl+,)
+   - Search for "Blender"
+   - Set the path to your Blender executable
+   - Example: `C:\Program Files\Blender Foundation\Blender 3.6\blender.exe`
+
+3. **Run the Script**
+   - Open `solar_system.py` in VS Code
+   - Press **Ctrl+Shift+P** (Command Palette)
+   - Type "Blender: Start" and select it
+   - Blender will open automatically
+   - Press **Ctrl+Shift+P** again
+   - Type "Blender: Run Script" and select it
+   - The script will execute in Blender
+
+4. **Alternative Quick Run**
+   - With the script open in VS Code
+   - Press **Ctrl+Shift+P**
+   - Type "Blender: Build and Start"
+   - This will launch Blender and run the script automatically
+
+#### Method 2: Blender Scripting Tab
 1. Open Blender
 2. Switch to **Scripting** workspace
 3. Click **New** to create a new text file
 4. Paste the solar system code
 5. Click **Run Script** (play button)
 
-#### Method 2: External Python File
+#### Method 3: External Python File in Blender
 1. Save the script as `solar_system.py`
 2. Open Blender
 3. Go to **Scripting** → **Open** → Select `solar_system.py`
 4. Click **Run Script**
 
-#### Method 3: Command Line
+#### Method 4: Command Line
 ```bash
 blender --python solar_system.py
 ```
@@ -230,6 +267,22 @@ solar_system.py
 
 **"No module named 'bpy'"**
 - Script must run inside Blender, not standard Python
+- If using VS Code, ensure you're using "Blender: Run Script" command, not regular Python run
+
+**VS Code can't find Blender**
+- Check Blender path in VS Code settings
+- Make sure Blender is installed and the path is correct
+- Try absolute path: `C:\Program Files\Blender Foundation\Blender 3.6\blender.exe`
+
+**Blender doesn't open from VS Code**
+- Verify Blender Development extension is installed
+- Restart VS Code after configuring Blender path
+- Check if Blender opens manually from the installation folder
+
+**Script doesn't run after pressing Ctrl+Shift+P**
+- Make sure you selected "Blender: Run Script" not just "Run"
+- Ensure Blender is already open (use "Blender: Start" first)
+- Check the VS Code output panel for error messages
 
 **Objects not appearing**
 - Check if scene was cleared properly
@@ -273,13 +326,6 @@ Suggestions for improvements:
 - Built using **Blender 3D** and Python API
 - Inspired by real solar system mechanics
 - Designed for educational demonstration of OOP principles
-  
-## Authors
-Maryam Arshad(498506),Shahab Shinwari
-(539515),
-Usama Bin Nadeem (539308),
-Naveed Anjum (577607)
-
 
 ---
 
